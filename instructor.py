@@ -22,8 +22,5 @@ class Instructor:
         self.courses = defaultdict(int)
 
     def get_summary(self):
-        if self.courses:
-            for keys, values in sorted(self.courses.items()):
-                yield[self.id, self.name, self.dept, keys, values]
-        else:
-            yield[self.id, self.name, self.dept, "", ""]
+        for keys, values in sorted(self.courses.items()):
+            yield[self.id, self.name, self.dept, keys, values]

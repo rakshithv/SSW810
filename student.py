@@ -21,7 +21,4 @@ class Student:
         self.courses = defaultdict(str)
 
     def get_summary(self):
-        if self.courses:
-            return [self.id, self.name, sorted(list(self.courses.keys()))]
-        else:
-            return [self.id, self.name, []]
+        return [self.id, self.name, sorted(list(self.courses.keys()))]
