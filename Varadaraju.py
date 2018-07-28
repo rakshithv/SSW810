@@ -3,7 +3,7 @@
 # university. This program will take as an input a folder that contains
 # data for students, instructors and grades
 #
-# Written by Rakshith Varadaraju, July 26 2018 for Homework 10 in SSW-810
+# Written by Rakshith Varadaraju, July 27 2018 for Homework 10 in SSW-810
 #-----------------------------------------------------------------------------
 import os
 import unittest
@@ -33,7 +33,8 @@ class RepositoryTest(unittest.TestCase):
         actual_list = []
         for item in sit.student_list.values():
             actual_list.append(item.get_summary())
-        expected_list = [['10103', 'Baldwin, C', ['SSW 567']]]
+        expected_list = [['10103', 'Baldwin, C', ['SSW 567'],['SSW 540','SSW 555','SSW 564'],
+        ['CS 501','CS 513','CS 545']]]
         self.assertEqual(actual_list,expected_list)
 
         actual_list = []

@@ -41,7 +41,9 @@ class Repository:
         '''This function reads in the student data and create
         individual student records'''
         for id, name, major in extract('students.txt',3):
-            self.student_list[id] = Student(id,name,major)
+            self.student_list[id] = Student(id,name,major,
+            self.major_list[major].courses.get("R"),
+            self.major_list[major].courses.get("E"))
 
     def update_instructor_data(self):
         '''This function reads in the instructor data and create
@@ -71,7 +73,7 @@ class Repository:
     def print_student_summary(self):
         '''This function will print student data'''
         print('Student Summary')
-        pt = PrettyTable(field_names=["CWID","Name","Completed Courses"])
+        pt = PrettyTable(field_names=["CWID","Name","Completed Courses","Remaining Required","Remaining Electives"])
         for item in self.student_list.values():
             pt.add_row(item.get_summary())
         print(pt)
