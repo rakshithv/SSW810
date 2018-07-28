@@ -7,6 +7,7 @@
 
 from collections import defaultdict
 from instructor import Instructor
+from major import Major
 from prettytable import PrettyTable
 from text_file_importer import extract
 from student import Student
@@ -18,12 +19,24 @@ class Repository:
         # This datastructure will store
         # Name of the college
         self.name = name
+        self.major_list = defaultdict(Major)
         self.student_list = defaultdict(Student)
         self.instructor_list = defaultdict(Instructor)
+        self.update_major_data()
         self.update_student_data()
         self.update_instructor_data()
         self.process_grade_data()
     
+    def update_major_data(self):
+        '''This function reads in the major data and create
+        individual major records'''
+        # Is there a way to refactor this code so that 
+        # the loop doesnt have to be done twice
+        for dept, flag, course in extract('majors.txt', 3):
+            self.major_list[dept] = Major(dept)
+        for dept, flag, course in extract('majors.txt', 3):
+            self.major_list[dept].courses[flag].append(course)        
+        
     def update_student_data(self):
         '''This function reads in the student data and create
         individual student records'''
@@ -46,6 +59,14 @@ class Repository:
     def get_name(self):
         '''This function will return the name of the repository'''
         return self.name
+
+    def print_major_summary(self):
+        '''This function will print major data'''
+        print('Major Summary')
+        pt = PrettyTable(field_names=["Dept", "Required", "Electives"])
+        for item in (self.major_list.values()):
+            pt.add_row(item.get_summary())
+        print(pt)
 
     def print_student_summary(self):
         '''This function will print student data'''

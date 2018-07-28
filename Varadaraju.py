@@ -23,6 +23,7 @@ def create_repo(path):
 
 def main():
     sit = create_repo("/Users/rakra/Desktop/Stevens_Summer/SSW810/SIT")
+    sit.print_major_summary()
     sit.print_student_summary()
     sit.print_instructor_summary()
 
@@ -41,6 +42,12 @@ class RepositoryTest(unittest.TestCase):
                 actual_list.append(summary)
         expected_list = [['98765', 'Einstein, A', 'SFEN', 'SSW 567', 1]]
         self.assertEqual(actual_list, expected_list)
+
+        actual_list = []
+        for item in sit.major_list.values():
+            actual_list.append(item.get_summary())
+        expected_list = [['SFEN',['SSW 540','SSW 555', 'SSW 564', 'SSW 567'],['CS 501','CS 513','CS 545']]]
+        self.assertEqual(actual_list,expected_list)
 
 main()
 unittest.main(exit=False, verbosity=2)
